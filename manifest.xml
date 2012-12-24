@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin_manifest xmlns="http://www.elgg.org/plugin_manifest/1.8">
+	<name>galliCache</name>
+	<author>Mahin Akbar @ Team Webgalli</author>
+	<version>1.0</version>
+	<category>enhancement</category>
+	<category>development</category>
+	<category>performance</category>	
+	<category>Team Webgalli</category>
+	<description>Plugin to speedup your Elgg sites. Dynamic pages for guests are cached and served as static pages.</description>
+	<website>http://www.webgalli.com/</website>
+	<license>GPL2</license>
+	<requires>
+		<type>elgg_release</type>
+		<version>1.8</version>
+	</requires>
+</plugin_manifest>
