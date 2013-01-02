@@ -1,12 +1,7 @@
 <?php
-// Initiate cache
-$version = GALLI_CACHE_VERSION;
-$cache = galliCache_cache_exists();
-if($cache){
-	galliCache_read_cache($cache);
-	echo "<!-- Static page served using Elgg-galliCache($version). Powered by Team Webgalli. -->";
-	return true;
-} else {	
+	// Initiate cache
+	$version = GALLI_CACHE_VERSION;
+	ob_start();
 ?>
 <?php
 /**
@@ -90,5 +85,4 @@ $time = date('l jS \of F Y h:i:s A');
 echo "<!-- Generated on $time .-->";
 galliCache_create_cache();
 echo "<!-- Dynamic page generated. Page not cached by Elgg-galliCache($version). Powered by Team Webgalli.. -->";
-}	
 ?>

@@ -13,16 +13,11 @@
  
 $validity = elgg_get_plugin_setting('validity', 'galliCache');
  
-define('GALLI_CACHE_VERSION', '1.0');
+define('GALLI_CACHE_VERSION', '1.1');
 define('GALLI_CACHE_PATH',elgg_get_data_path()."html_cache");
-define('GALLI_CACHE_VALIDITY', 60*60*$validity);
+define('GALLI_CACHE_VALIDITY', $validity);
  
 elgg_register_event_handler('init', 'system', 'galliCache_init');
-
-function galliCache_contexts_to_skip(){
-	$skipcontexts = elgg_get_plugin_setting('skipcontexts', 'galliCache');
-	return explode(",",$skipcontexts);
-}	
 
 function galliCache_init() {
 	elgg_register_page_handler('galliCache_js', 'galliCache_js_page_handler');
@@ -30,6 +25,9 @@ function galliCache_init() {
 	elgg_register_js('galliCache.js', elgg_get_site_url()."galliCache_js/");
 	elgg_load_js('galliCache.js');	
 
+	elgg_register_plugin_hook_handler('route', 'all', 'galliCache_route_hook');	
+	elgg_register_plugin_hook_handler('index', 'system', 'galliCache_route_hook');
+	
 	elgg_register_plugin_hook_handler('cron', 'daily', 'galliCache_cron_jobs');	
 }
 
@@ -58,8 +56,6 @@ function galliCache_cache_exists($filename = false){
 		} else {
 			unlink ($cache_filename);
 		}	
-	} else {
-		ob_start(); 
 	}
 	return false;
 }	
@@ -113,8 +109,25 @@ function galliCache_cron_jobs($hook, $entity_type, $returnvalue, $params){
 	return $returnvalue;
 }	
 
+function galliCache_route_hook($hook, $entity_type, $returnvalue, $params){
+	$version = GALLI_CACHE_VERSION;
+	$cache = galliCache_cache_exists();
+	if($cache){
+		galliCache_read_cache($cache);
+		echo "<!-- Static page served using Elgg-galliCache($version). Powered by Team Webgalli. -->";
+		exit;
+	} else {
+		return $returnvalue;
+	}	
+}
+
 function galliCache_js_page_handler($page) {
 	Header("content-type: application/x-javascript");
 	echo elgg_view('galliCache/initiate_elgg');
 	return true;
 }
+
+function galliCache_contexts_to_skip(){
+	$skipcontexts = elgg_get_plugin_setting('skipcontexts', 'galliCache');
+	return explode(",",$skipcontexts);
+}	

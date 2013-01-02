@@ -13,7 +13,7 @@
  
 // set default values
 if (!isset($vars['entity']->validity)) {
-	$vars['entity']->validity = 24;
+	$vars['entity']->validity = 86400;
 }
 
 $content = "<div class='elgg-message'>Need help in configuring the plugin? See <a href='http://www.webgalli.com/blog/elgg-gallicache-plugin-a-performance-booster-for-your-elgg-websites/'>galliCache Tutorials</a>.</div>";

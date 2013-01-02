@@ -1,5 +1,9 @@
 = galliCache Version history =
 
+1.01 (26/12/2012):
+
+- Fixed minor cache validity issue
+
 1.0 (24/12/2012):
 
 - initial release

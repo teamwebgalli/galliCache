@@ -13,7 +13,7 @@
  
 	$english = array(
 		'galliCache:header'			=> "Configure the galliCache plugin",
-		'galliCache:validity'		=> "Cache validity.",
+		'galliCache:validity'		=> "Cache validity seconds.",
 		'galliCache:skipcontexts' 	=> "Contexts on which no caching should be applied.",
 		'galliCache:credits'		=> "If you liked this plugin, dont forgrt to recommend it or make a donation for continous development of this plugin",
 	);
